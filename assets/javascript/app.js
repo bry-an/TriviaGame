@@ -137,9 +137,12 @@ var showQuestion = function () {
 
         //add answer options
         newAnswerOpts.forEach(function (answer, index) {
+            var radioDiv = $("<div>").attr("id", "radioDiv");
             var newRadioBtn = $("<input type = 'radio' name = 'option'>" + answer + "</input>").attr("id", index)
                 .addClass("radioQuestion");
-            $(answerDiv).append(newRadioBtn);
+            $(answerDiv).append(radioDiv);
+            $(radioDiv).append(newRadioBtn);
+
         })
         submitDiv.append(submitBtn);
         startCountdown(); //start timer

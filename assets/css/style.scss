@@ -1,10 +1,10 @@
-
 .container {
     width: 80%;
-    margin: auto;
+    margin: 30px auto 20px auto;
     border: 1px solid #ccc;
     padding: 20px;
     min-height: 400px;
+    background-color: white;
 }
 h1 {
     color: red;
@@ -41,6 +41,6 @@ input[type=radio] {
 
 #question {
     font-size: 1.3em;
-    margin-top: 20px;
+    margin: 20px 0 20px 0;
 
 }
