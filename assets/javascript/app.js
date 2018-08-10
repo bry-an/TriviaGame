@@ -112,6 +112,8 @@ var finalStats = function () {
     stats.html("<p><strong>Finished! You answered " + statsPercent + "% of questions correctly. Play again!</strong></p>");
     stats.append(startBtn);
     correct = 0;
+    questionIdx = 0;
+    startBtn.on("click", showQuestion);
 }
 
 var showQuestion = function () {
