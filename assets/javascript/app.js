@@ -105,7 +105,6 @@ var game = {
     },
 
     finalStats: function () {
-        var grade = $("<p class = 'grade'>");
         var stats = $("<p class = 'statsDiv'>");
         var startBtn = $("<button id = 'start'>").text("Play again");
         $("#main").empty();
