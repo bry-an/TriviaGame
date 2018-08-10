@@ -61,7 +61,7 @@ var questions = [
     },
     {
         q: "Within a chemistry context, what is a mole?",
-        a: ["A charged molecule", "An uncharged molecule", "A specific number of molecules", "The mathematical inverse of a substance's quantity"],
+        a: ["A charged molecule", "An uncharged molecule", "A specific number of molecules", "The mathematical inverse of quantity"],
         correctAns: "A specific number of molecules",
         correctAnsIdx: 2,
     },
@@ -103,12 +103,13 @@ var verify = function () {
 }
 
 var finalStats = function () {
+    var grade = $("<p>").addClass("grade");
     var stats = $("<p>").addClass("statsDiv");
     var startBtn = $("<button>").attr("id", "start").text("Play again");
     $("#main").empty();
     $("#main").append(stats);
     statsPercent = Math.round(correct / questions.length * 100);
-    stats.html("<strong>Finished! You answered " + statsPercent + "% of questions correctly. Play again!</strong>");
+    stats.html("<p><strong>Finished! You answered " + statsPercent + "% of questions correctly. Play again!</strong></p>");
     stats.append(startBtn);
     correct = 0;
 }
