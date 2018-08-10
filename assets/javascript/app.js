@@ -1,6 +1,6 @@
 var questionIdx = 0;
 var correct;
-var timer;
+var timeRemaining;
 var counter;
 
 var questions = [
@@ -68,15 +68,15 @@ var questions = [
 ]
 
 var startCountdown = function () {
-    timer = 20;
+    timeRemaining = 20;
     counter = setInterval(runCountdown, 1000);
 
 }
 
 var runCountdown = function () {
-    timer--;
-    $("#timerDiv").html("<h2>You have " + timer + "seconds remaining.</h2>");
-    if (timer == 0) {
+    timeRemaining--;
+    $("#timerDiv").html("<h3>You have " + timeRemaining + " seconds remaining.</h3>");
+    if (timeRemaining == 0) {
         verify();
     }
 }
@@ -85,6 +85,7 @@ var runCountdown = function () {
 }
 
 var verify = function () {
+    stopCountdown()
     var statusDiv = $("<p>");
     if ($("#" + questions[questionIdx].correctAnsIdx).prop("checked")) {
         correct++;
@@ -98,11 +99,17 @@ var verify = function () {
         statusDiv.text("Sorry! The correct answer is: " + questions[questionIdx].correctAns);
     }
     questionIdx++;
-    setTimeout(showQuestion, 8 * 1000)
+    setTimeout(showQuestion, 5 * 1000)
 }
 
 var finalStats = function () {
-
+    var stats = $("<p>")
+    var startBtn = $("<button>").attr("id", "start").text("Play again");
+        $("#main").empty();
+        $("#main").append(stats);
+        statsPercent = Math.round(correct/10);
+        stats.html("<h3>Finished! You correctly answered " + statsPercent + "% of questions correctly. Play again!</h3>");
+        stats.append(startBtn);
 }
 
 var showQuestion = function () {
@@ -125,11 +132,12 @@ var showQuestion = function () {
 
         //add answer options
         newAnswerOpts.forEach(function (answer, index) {
-            var newRadioBtn = $("<input type = 'radio'>" + answer + "</input>").attr("id", index)
+            var newRadioBtn = $("<input type = 'radio' name = 'option'>" + answer + "</input>").attr("id", index)
                 .addClass("radioQuestion");
             $(answerDiv).append(newRadioBtn);
         })
         submitDiv.append(submitBtn);
+        startCountdown(); //start timer
 
         submitBtn.on("click", verify);
     }
@@ -139,14 +147,8 @@ var showQuestion = function () {
 
 $(document).ready(function () {
 
-    $("#start").on("click", function() {
-        setInterval(function() {
-            questions.forEach(function(question) {
-                play(question);
-            }, 30 * 1000);
-        })
+    $("#start").on("click", showQuestion)
 
-    });
 
 
 })
