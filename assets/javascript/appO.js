@@ -76,7 +76,7 @@ var game = {
 
     runCountdown: function () {
         timeRemaining--;
-        $("#timerDiv").text("You have " + timeRemaining + " seconds remaining");
+        $("#timerDiv").text("You have " + timeRemaining + " seconds remaining.");
         if (timeRemaining == 0) {
             game.verify();
         }
