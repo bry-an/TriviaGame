@@ -19,7 +19,7 @@ var questions = [
     },
     {
         q: "What is the key component of noble gases?",
-        a: ["Their outer electron shell is incomplete", "They are named after British chemists", "They do not react with other stubstances"],
+        a: ["Their outer electron shell is incomplete", "They are named after British chemists", "They do not react with other substances"],
         correctAns: "They do not react with other substances",
         correctAnsIdx: 2,
     },
