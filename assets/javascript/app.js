@@ -1,5 +1,5 @@
 var questionIdx = 0;
-var correct;
+var correct = 0;
 var timeRemaining;
 var counter;
 
@@ -43,7 +43,7 @@ var questions = [
     },
     {
         q: "Who invented the modern periodic table?",
-        a: ["Alfred Nobel", "Dmitri Mendeleev", "James Watson", "Sir Aurthur Reynolds"],
+        a: ["Alfred Nobel", "Dmitri Mendeleev", "James Watson", "Sir Arthur Reynolds"],
         correctAns: "Dmitri Mendeleev",
         correctAnsIdx: 1,
     },
@@ -54,7 +54,7 @@ var questions = [
         correctAnsIdx: 2,
     },
     {
-        q: "According to Boyle's law, if you decerase a gas's volume, its pressure will...",
+        q: "According to Boyle's law, if you decrease a gas's volume, its pressure will...",
         a: ["increase", "decrease", "stay constant"],
         correctAns: "increase",
         correctAnsIdx: 0,
@@ -75,45 +75,46 @@ var startCountdown = function () {
 
 var runCountdown = function () {
     timeRemaining--;
-    $("#timerDiv").html("<h3>You have " + timeRemaining + " seconds remaining.</h3>");
+    $("#timerDiv").text("You have " + timeRemaining + " seconds remaining.");
     if (timeRemaining == 0) {
         verify();
     }
 }
- var stopCountdown = function () {
-     clearInterval(counter);
+var stopCountdown = function () {
+    clearInterval(counter);
 }
 
 var verify = function () {
     stopCountdown()
-    var statusDiv = $("<p>");
+    var statusDiv = $("<p>").addClass("statusDiv");
     if ($("#" + questions[questionIdx].correctAnsIdx).prop("checked")) {
         correct++;
         $("#main").empty();
         $("#main").append(statusDiv);
-        statusDiv.text("Correct!!");
+        statusDiv.text("Correct!");
     }
     else {
         $("#main").empty();
         $("#main").append(statusDiv);
-        statusDiv.text("Sorry! The correct answer is: " + questions[questionIdx].correctAns);
+        statusDiv.text("Sorry, the correct answer is: " + questions[questionIdx].correctAns);
     }
     questionIdx++;
     setTimeout(showQuestion, 5 * 1000)
 }
 
 var finalStats = function () {
-    var stats = $("<p>")
+    var stats = $("<p>").addClass("statsDiv");
     var startBtn = $("<button>").attr("id", "start").text("Play again");
-        $("#main").empty();
-        $("#main").append(stats);
-        statsPercent = Math.round(correct/10);
-        stats.html("<h3>Finished! You correctly answered " + statsPercent + "% of questions correctly. Play again!</h3>");
-        stats.append(startBtn);
+    $("#main").empty();
+    $("#main").append(stats);
+    statsPercent = Math.round(correct / questions.length * 100);
+    stats.html("<strong>Finished! You answered " + statsPercent + "% of questions correctly. Play again!</strong>");
+    stats.append(startBtn);
+    correct = 0;
 }
 
 var showQuestion = function () {
-    if (questionIdx < 10) {
+    if (questionIdx < questions.length) {
         $("#main").empty();
         var timerDiv = $("<div>").attr("id", "timerDiv");
         var questionDiv = $("<div>").attr("id", "question");
@@ -121,6 +122,7 @@ var showQuestion = function () {
         var submitDiv = $("<div>");
         var newQuestion = questions[questionIdx].q;
         var newAnswerOpts = questions[questionIdx].a;
+
 
         var submitBtn = $("<button>")
             .attr("id", "submitBtn")
