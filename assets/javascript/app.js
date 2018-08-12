@@ -127,7 +127,7 @@ var game = {
             var newQuestion = game.questions[questionIdx].q;
             var newAnswerOpts = game.questions[questionIdx].a;
 
-            var submitBtn = $("<button id = 'submitBtn'>").text("Submit!");
+            var submitBtn = $("<button class = 'button-primary' id = 'submitBtn'>").text("Submit!");
 
             $("#main").append(timerDiv, questionDiv, answerDiv, submitDiv); //append divs
 
